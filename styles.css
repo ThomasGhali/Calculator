@@ -25,6 +25,7 @@ body{
     min-height: 375px;
     max-height: 400px;
     border-radius: 8%;
+    transform: translateX(-10%);
 }
 
 .contents-conatiner{

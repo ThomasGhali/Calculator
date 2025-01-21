@@ -7,17 +7,31 @@ let equalClicked = false;
 const numOperator = document.querySelector('.numbers-operators');
 const input = document.querySelector('input');
 const clearButton = document.querySelector('.clr');
-const previousResults = document.querySelector("#notes")
+const previousResults = document.querySelector("#notes");
+const deleteButton = document.querySelector('#del');
 
 
 clearButton.addEventListener('click', ()=> resetVariables());
+
+deleteButton.addEventListener('click', () => {
+    input.value = input.value.slice(0, -1);
+    const inputValues = input.value.split(' ');
+
+    if (operator === 0) {
+        num1 = parseFloat(inputValues.join('')) || 0;
+    } else if(operator !==0 && num2 == 0){
+        operator = 0;
+        input.value = input.value.slice(0, -2);
+    } else {
+        num2 = parseFloat(inputValues[inputValues.length - 1]) || 0;
+    }
+});
 
 input.addEventListener("keydown", function (e) {
     e.preventDefault();
 });
 
 numOperator.addEventListener('click', (event) => {
-    debugger;
     if (event.target.classList.contains('num') ) {
         if(equalClicked){
             resetVariables();
@@ -35,19 +49,24 @@ numOperator.addEventListener('click', (event) => {
         } else {
             num2 = parseFloat(input.value.split(' ').pop());
         }
-    } else if(event.target.classList.contains('operator')){
+    } 
+
+    else if(event.target.classList.contains('operator')){
 
         if (input.value.length >= 12) return;
 
         if(operator !== 0 && num2 !== 0){
+            debugger;
             operate(num1, operator, num2);
             previousResults.textContent = `${num1} ${operator} ${num2} `;
             num1 = parseFloat(input.value);
             num2 = 0;
+        } else if (operator !==0 && num1 !==0 && num2 == 0){
+            input.value = `${num1}`;
         }
         operator = event.target.textContent;
         input.value += ` ${operator} `;
-    }
+}
     
     if (equalClicked && operator !==0){
         num1 = parseFloat(storeResult);
@@ -64,6 +83,7 @@ numOperator.addEventListener('click', (event) => {
     }
 
 })
+
 
 function resetVariables(){
     input.value = '';
