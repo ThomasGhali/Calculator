@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Resizable Div Example</title>
+    <style>
+        .container {
+            display: flex; /* Enable flexbox layout */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        .my-div {
+            flex: 1; /* Allow the div to grow and shrink */
+            min-width: 600px; /* Minimum width */
+            max-width: 800px; /* Maximum width */
+            min-height: 100px; /* Minimum height */
+            max-height: 400px; /* Maximum height */
+            background-color: lightblue; /* Background color for visibility */
+            padding: 20px; /* Padding for content */
+            box-sizing: border-box; /* Include padding in width/height calculations */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="my-div">
+            Resize me! I can shrink and grow within a specific range.
+        </div>
+    </div>
+</body>
+</html>
